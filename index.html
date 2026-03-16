@@ -4,13 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>주간 캘린더</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   body {
     background: #ffffff;
-    color: #1a1a1a;
+    color: #111;
     font-family: 'Noto Sans KR', sans-serif;
     min-height: 100vh;
     display: flex;
@@ -38,24 +38,24 @@
   }
 
   .week-badge {
-    font-family: 'DM Mono', monospace;
-    font-size: 10px;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    padding: 3px 8px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    padding: 3px 10px;
     border-radius: 20px;
     transition: all 0.2s;
   }
 
-  .badge-this  { background: #f0f7e0; color: #5a8a00; }
-  .badge-next  { background: #e0f0f7; color: #007aa0; }
-  .badge-prev  { background: #f5f5f5; color: #888; }
-  .badge-other { background: #f5f5f5; color: #888; }
+  .badge-this  { background: #f0f7e0; color: #4a7a00; }
+  .badge-next  { background: #e0f0f7; color: #006a90; }
+  .badge-prev  { background: #f0f0f0; color: #555; }
+  .badge-other { background: #f0f0f0; color: #555; }
 
   .month-label {
-    font-size: 12px;
-    color: #aaa;
-    font-weight: 300;
+    font-size: 13px;
+    color: #333;
+    font-weight: 600;
   }
 
   .right {
@@ -66,27 +66,28 @@
 
   .clock {
     font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    color: #bbb;
+    font-size: 12px;
+    color: #555;
+    font-weight: 500;
   }
 
   .nav-btn {
     background: none;
-    border: 1px solid #e8e8e8;
-    color: #bbb;
-    width: 24px;
-    height: 24px;
+    border: 1px solid #ddd;
+    color: #333;
+    width: 26px;
+    height: 26px;
     border-radius: 6px;
     cursor: pointer;
-    font-size: 13px;
+    font-size: 14px;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: all 0.15s;
-    line-height: 1;
+    font-weight: 700;
   }
 
-  .nav-btn:hover { border-color: #ccc; color: #555; }
+  .nav-btn:hover { border-color: #999; color: #111; }
 
   .days-grid {
     display: grid;
@@ -103,52 +104,50 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 10px 4px 10px;
+    padding: 12px 4px;
     border-radius: 10px;
-    border: 1px solid #f0f0f0;
+    border: 1px solid #ebebeb;
     background: #fafafa;
     transition: all 0.15s;
-    cursor: default;
   }
 
-  .day-card:hover { border-color: #ddd; background: #f5f5f5; }
+  .day-card:hover { border-color: #ccc; background: #f3f3f3; }
 
   .day-card.today {
-    background: #f6fce8;
-    border-color: #b8e04a;
+    background: #f4fce6;
+    border-color: #a8d840;
   }
 
   .day-card.past {
-    opacity: 0.5;
+    opacity: 0.45;
   }
 
   .day-name {
-    font-size: 10px;
-    color: #bbb;
-    letter-spacing: 0.05em;
-    margin-bottom: 6px;
-    font-weight: 400;
+    font-size: 13px;
+    font-weight: 700;
+    color: #222;
+    letter-spacing: 0.03em;
+    margin-bottom: 8px;
   }
 
-  .day-card.today .day-name { color: #7ab800; }
+  .day-card.today .day-name { color: #4a7a00; }
 
   .day-num {
     font-family: 'DM Mono', monospace;
-    font-size: 20px;
+    font-size: 22px;
     font-weight: 500;
-    color: #222;
+    color: #111;
     line-height: 1;
   }
 
-  .day-card.today .day-num { color: #5a8a00; }
-  .day-card.past .day-num  { color: #999; }
+  .day-card.today .day-num { color: #4a7a00; }
 
   .today-dot {
-    width: 4px;
-    height: 4px;
+    width: 5px;
+    height: 5px;
     border-radius: 50%;
-    background: #b8e04a;
-    margin-top: 6px;
+    background: #a8d840;
+    margin-top: 7px;
   }
 
   .footer {
@@ -160,23 +159,25 @@
 
   .week-range {
     font-family: 'DM Mono', monospace;
-    font-size: 10px;
-    color: #ccc;
+    font-size: 11px;
+    color: #666;
+    font-weight: 500;
   }
 
   .today-btn {
     font-family: 'Noto Sans KR', sans-serif;
-    font-size: 10px;
+    font-size: 11px;
+    font-weight: 600;
     background: none;
-    border: 1px solid #eee;
-    color: #bbb;
-    padding: 3px 10px;
+    border: 1px solid #ddd;
+    color: #555;
+    padding: 4px 12px;
     border-radius: 20px;
     cursor: pointer;
     transition: all 0.15s;
   }
 
-  .today-btn:hover { border-color: #b8e04a; color: #7ab800; }
+  .today-btn:hover { border-color: #a8d840; color: #4a7a00; }
 
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(4px); }
@@ -230,21 +231,16 @@
     monday.setDate(monday.getDate() + offset * 7);
     const friday = new Date(monday); friday.setDate(friday.getDate() + 4);
 
-    // badge
     const badge = document.getElementById('weekBadge');
     if (offset === 0)       { badge.textContent = '이번주'; badge.className = 'week-badge badge-this'; }
     else if (offset === 1)  { badge.textContent = '다음주'; badge.className = 'week-badge badge-next'; }
     else if (offset === -1) { badge.textContent = '저번주'; badge.className = 'week-badge badge-prev'; }
     else                    { badge.textContent = `${offset > 0 ? '+':''}${offset}주`; badge.className = 'week-badge badge-other'; }
 
-    // month
     const ms = monday.getMonth()+1, me = friday.getMonth()+1, yr = monday.getFullYear();
     document.getElementById('monthLabel').textContent = ms === me ? `${yr}년 ${ms}월` : `${yr}년 ${ms}–${me}월`;
-
-    // range
     document.getElementById('weekRange').textContent = `${fmt(monday)} – ${fmt(friday)}`;
 
-    // grid
     const grid = document.getElementById('daysGrid');
     grid.innerHTML = '';
     grid.style.animation = 'none';
